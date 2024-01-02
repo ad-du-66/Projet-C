@@ -1,0 +1,72 @@
+#include <stdio.h>
+#include <string.h>
+
+#define MAX_PERSONNES 100
+#define MAX_CONGES 25
+#define MAX_UTILISATEURS 10
+
+// Structure pour représenter une personne
+struct Personne {
+    int numeroIdentification;
+    char nom[50];
+    char prenom[50];
+    char adresse[100];
+    char email[50];
+    char telephone[15];
+    char etatCivil[20];
+    char poste[50];
+    char grade[20];
+    float salaire;
+    int age;
+};
+
+// Structure pour représenter une demande de congé
+struct Conge {
+    int numeroIdentification;
+    char dateDebut[11];
+    char dateFin[11];
+    char statut[20];
+};
+
+// Structure pour représenter un utilisateur avec ses droits
+struct Utilisateur {
+    char nomUtilisateur[20];
+    char role[20];
+};
+
+// Liste des personnes
+struct Personne personnes[MAX_PERSONNES];
+int nombrePersonnes = 0;
+
+// Liste des demandes de congé
+struct Conge demandesConges[MAX_CONGES];
+int nombreDemandesConges = 0;
+
+// Liste des utilisateurs
+struct Utilisateur utilisateurs[MAX_UTILISATEURS];
+int nombreUtilisateurs = 0;
+
+// Fonction pour créer une fiche de personne
+void creerFichePersonne(char *nom, char *prenom, char *adresse, char *email, char *telephone,
+                         char *etatCivil, char *poste, char *grade, float salaire, int age) {
+    if (nombrePersonnes < MAX_PERSONNES) {
+        struct Personne nouvellePersonne;
+        nouvellePersonne.numeroIdentification = nombrePersonnes + 1; // Attribution d'un numéro d'identification simple
+        strcpy(nouvellePersonne.nom, nom);
+        strcpy(nouvellePersonne.prenom, prenom);
+        strcpy(nouvellePersonne.adresse, adresse);
+        strcpy(nouvellePersonne.email, email);
+        strcpy(nouvellePersonne.telephone, telephone);
+        strcpy(nouvellePersonne.etatCivil, etatCivil);
+        strcpy(nouvellePersonne.poste, poste);
+        strcpy(nouvellePersonne.grade, grade);
+        nouvellePersonne.salaire = salaire;
+        nouvellePersonne.age = age;
+
+        personnes[nombrePersonnes++] = nouvellePersonne;
+
+        printf("Fiche de %s %s créée avec succès.\n", prenom, nom);
+    } else {
+        printf("Limite de personnes atteinte. Impossible de créer une nouvelle fiche.\n");
+    }
+}
